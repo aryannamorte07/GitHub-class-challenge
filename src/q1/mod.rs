@@ -1,34 +1,33 @@
 //! Put all code for individual functions here!
 
 pub fn is_even(n: i64) -> bool {
-    
     // TODO: Return true if n is even, false otherwise
-    n%2 == 0
+    if n%2 == 0 { 
+        return true;
+    }
+    else {
+        
+    } 
+        return false;
+    }
 
-}
 
 pub fn next_collatz(n: i64) -> i64 {
     // TODO: Apply the Collatz rule once:
-    
     //   - If n is even, return n / 2
-    if n%2 == 0 {
-        return n/2
-    }
     //   - If n is odd, return 3 * n + 1
-    else {
-        return 3* n +1
-    }
-    
+    todo!()
 }
-
-
 
 pub fn collatz_steps(n: i64) -> u32 {
     // TODO: Count how many steps it takes for the Collatz sequence starting at n to reach 1
     //   - If n is already 1, return 0
+
+
+    todo!()
     //   - Otherwise, repeatedly apply next_collatz and count the steps
 
-     todo!()
+     
 }
 
 pub fn collatz_max_value(n: i64) -> i64 {
@@ -36,7 +35,7 @@ pub fn collatz_max_value(n: i64) -> i64 {
     //   - Track the maximum value seen as you iterate toward 1
     //   - The starting value n should be considered as a candidate for the max
 
-     todo!()
+
 }
 
 pub fn longest_collatz_in_range(start: i64, end: i64) -> i64 {
