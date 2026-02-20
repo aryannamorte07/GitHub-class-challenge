@@ -1,0 +1,145 @@
+name: Autograding Tests
+on: [repository_dispatch, workflow_dispatch]
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy,rustfmt
+
+      - name: Run cargo run (demo - not autograded)
+        run: cargo run
+        continue-on-error: true
+        timeout-minutes: 2
+        
+      - name: is_even_test_cases
+        id: is-even-test-cases
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "is_even_test_cases"
+          setup-command: ""
+          command: "cargo test is_even_test_cases"
+          timeout: 10
+          max-score: 1
+
+      - name: next_collatz_test_cases
+        id: next-collatz-test-cases
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "next_collatz_test_cases"
+          setup-command: ""
+          command: "cargo test next_collatz_test_cases"
+          timeout: 10
+          max-score: 1
+
+      - name: collatz_steps_test_cases
+        id: collatz-steps-test-cases
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "collatz_steps_test_cases"
+          setup-command: ""
+          command: "cargo test collatz_steps_test_cases"
+          timeout: 10
+          max-score: 1
+
+      - name: collatz_max_value_test_cases
+        id: collatz-max-value-test-cases
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "collatz_max_value_test_cases"
+          setup-command: ""
+          command: "cargo test collatz_max_value_test_cases"
+          timeout: 10
+          max-score: 1
+
+      - name: longest_collatz_in_range_test_cases
+        id: longest-collatz-in-range-test-cases
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "longest_collatz_in_range_test_cases"
+          setup-command: ""
+          command: "cargo test longest_collatz_in_range_test_cases"
+          timeout: 10
+          max-score: 1
+
+      - name: average_collatz_steps_test_cases
+        id: average-collatz-steps-test-cases
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "average_collatz_steps_test_cases"
+          setup-command: ""
+          command: "cargo test average_collatz_steps_test_cases"
+          timeout: 10
+          max-score: 1
+
+      - name: test_rustfmt_passes
+        id: test-rustfmt-passes
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_rustfmt_passes"
+          setup-command: ""
+          command: "cargo test --test test_clippy_and_fmt test_rustfmt_passes"
+          timeout: 10
+          max-score: 1
+
+      - name: test_clippy_passes
+        id: test-clippy-passes
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_clippy_passes"
+          setup-command: ""
+          command: "cargo test --test test_clippy_and_fmt test_clippy_passes"
+          timeout: 10
+          max-score: 1
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: COMMIT_COUNT
+        id: commit-count
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "COMMIT_COUNT"
+          setup-command: ""
+          command: "bash ./.autograder/commit_count.sh 10"
+          timeout: 10
+          max-score: 1
+
+      - name: BRANCH_COUNT
+        id: branch-count
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "BRANCH_COUNT"
+          setup-command: ""
+          command: "bash ./.autograder/branch_count.sh 6"
+          timeout: 10
+          max-score: 1
+
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          IS-EVEN-TEST-CASES_RESULTS: "${{steps.is-even-test-cases.outputs.result}}"
+          NEXT-COLLATZ-TEST-CASES_RESULTS: "${{steps.next-collatz-test-cases.outputs.result}}"
+          COLLATZ-STEPS-TEST-CASES_RESULTS: "${{steps.collatz-steps-test-cases.outputs.result}}"
+          COLLATZ-MAX-VALUE-TEST-CASES_RESULTS: "${{steps.collatz-max-value-test-cases.outputs.result}}"
+          LONGEST-COLLATZ-IN-RANGE-TEST-CASES_RESULTS: "${{steps.longest-collatz-in-range-test-cases.outputs.result}}"
+          AVERAGE-COLLATZ-STEPS-TEST-CASES_RESULTS: "${{steps.average-collatz-steps-test-cases.outputs.result}}"
+          TEST-RUSTFMT-PASSES_RESULTS: "${{steps.test-rustfmt-passes.outputs.result}}"
+          TEST-CLIPPY-PASSES_RESULTS: "${{steps.test-clippy-passes.outputs.result}}"
+          COMMIT-COUNT_RESULTS: "${{steps.commit-count.outputs.result}}"
+          BRANCH-COUNT_RESULTS: "${{steps.branch-count.outputs.result}}"
+        with:
+          runners: is-even-test-cases,next-collatz-test-cases,collatz-steps-test-cases,collatz-max-value-test-cases,longest-collatz-in-range-test-cases,average-collatz-steps-test-cases,test-rustfmt-passes,test-clippy-passes,commit-count,branch-count

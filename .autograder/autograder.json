@@ -1,0 +1,82 @@
+[
+  {
+    "name": "is_even_test_cases",
+    "docstring": "Tests is_even with positive, negative, and zero values.",
+    "timeout": 10,
+    "points": 1,
+    "min_commits": null,
+    "manifest_path": null
+  },
+  {
+    "name": "next_collatz_test_cases",
+    "docstring": "Tests next_collatz for both even and odd inputs.",
+    "timeout": 10,
+    "points": 1,
+    "min_commits": null,
+    "manifest_path": null
+  },
+  {
+    "name": "collatz_steps_test_cases",
+    "docstring": "Tests collatz_steps with known sequence lengths including n=27.",
+    "timeout": 10,
+    "points": 1,
+    "min_commits": null,
+    "manifest_path": null
+  },
+  {
+    "name": "collatz_max_value_test_cases",
+    "docstring": "Tests collatz_max_value with known peak values including n=27 reaching 9232.",
+    "timeout": 10,
+    "points": 1,
+    "min_commits": null,
+    "manifest_path": null
+  },
+  {
+    "name": "longest_collatz_in_range_test_cases",
+    "docstring": "Tests longest_collatz_in_range with known ranges.",
+    "timeout": 10,
+    "points": 1,
+    "min_commits": null,
+    "manifest_path": null
+  },
+  {
+    "name": "average_collatz_steps_test_cases",
+    "docstring": "Tests average_collatz_steps with known averages.",
+    "timeout": 10,
+    "points": 1,
+    "min_commits": null,
+    "manifest_path": null
+  },
+  {
+    "name": "test_rustfmt_passes",
+    "docstring": "Checks that code is properly formatted with cargo fmt.",
+    "timeout": 10,
+    "points": 1,
+    "min_commits": null,
+    "manifest_path": null
+  },
+  {
+    "name": "test_clippy_passes",
+    "docstring": "Checks that code passes clippy lints with no warnings.",
+    "timeout": 10,
+    "points": 1,
+    "min_commits": null,
+    "manifest_path": null
+  },
+  {
+    "name": "COMMIT_COUNT",
+    "docstring": "Ensures at least 10 commits (1 per subproblem branch + 1 merge each).",
+    "timeout": 10,
+    "points": 1,
+    "min_commits": 10,
+    "manifest_path": null
+  },
+  {
+    "name": "BRANCH_COUNT",
+    "docstring": "Ensures at least 6 branches (main + 5 subproblem feature branches).",
+    "timeout": 10,
+    "points": 1,
+    "min_commits": null,
+    "manifest_path": null
+  }
+]
